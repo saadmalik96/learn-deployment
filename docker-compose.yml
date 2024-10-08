@@ -1,0 +1,32 @@
+services:
+  saad-deploy-be:
+    build: ./saad-deploy-be
+    container_name: "saad-deploy-be"
+
+  saad-deploy-fe:
+    build: ./saad-deploy-fe
+    container_name: "saad-deploy-fe"
+    depends_on:
+      - saad-deploy-be
+  proxy:
+    build: ./nginx
+    container_name: "saad-deploy-proxy"
+    restart: always
+    ports:
+      - "80:80"
+
+# services:
+#   saad-deploy-be:
+#     image: saadmalik96/saad-deploy-be:latest
+#     container_name: "saad-deploy-be"
+
+#   saad-deploy-fe:
+#     image: saadmalik96/saad-deploy-fe:latest
+#     container_name: "saad-deploy-fe"
+#     depends_on:
+#       - saad-deploy-be
+#   proxy:
+#     image: saadmalik96/proxy:latest
+#     container_name: "proxy"
+#     ports:
+#       - "80:80"
